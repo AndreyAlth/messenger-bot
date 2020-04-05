@@ -7,6 +7,9 @@ const keys = require('./config/keys')
 const app = express()
 const port = 3000
 
+//loading enviroment varible
+require('dotenv').config()
+
 ///middleware
 app.use(bodyParser.json())
 
@@ -52,7 +55,7 @@ app.get('/webhook', (req, res)=>{
     }
 
 })
-
+console.log(process.env.TOKEN_FB)
 
 //Sets server port and logs message on success
 app.listen(port, ()=>{
