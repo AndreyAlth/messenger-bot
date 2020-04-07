@@ -2,7 +2,7 @@
 
 const express = require('express')
 const bodyParser = require('body-parser')
-const keys = require('./config/keys')
+//const keys = require('./config/keys')
 
 const app = express()
 const port = 3000
@@ -22,10 +22,13 @@ app.post('/webhook', (req, res)=>{
 
     if(body.object === 'page'){
         body.entry.forEach(function(entry){
-            //get the messageentry.messaging is an array, but 
-            // will only ever contain one message, so we get index 0
+            //gets the body of the webhook event
             let webhook_event = entry.messaging[0];
             console.log(webhook_event);
+
+            //get the sender PSID
+            let sender_psid = webhook_event.sender.id
+            console.log('Sender PSID: ' + sender_psid)
         })
         res.status(200).send('Evento recibido')
     }
@@ -58,7 +61,21 @@ app.get('/webhook', (req, res)=>{
     }
 
 })
-console.log(process.env.TOKEN_FB)
+
+// Handles messages events
+function handleMessage(sender_psid, received_message) {
+
+}
+
+// Handles messaging_postbacks events
+function handlePostback(sender_psid, received_postback) {
+
+}
+
+// Sends response messages via the Send API
+function callSendAPI(sender_psid, response) {
+  
+}
 
 //Sets server port and logs message on success
 app.listen(port, ()=>{
