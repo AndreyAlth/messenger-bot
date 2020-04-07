@@ -7,6 +7,9 @@ const keys = require('./config/keys')
 const app = express()
 const port = 3000
 
+//add access token
+const TOKEN_FB = process.env.PAGE_ACCESS_TOKEN
+
 //loading enviroment varible
 require('dotenv').config()
 
@@ -34,7 +37,7 @@ app.post('/webhook', (req, res)=>{
 //Add webhook verification
 app.get('/webhook', (req, res)=>{
     //your token
-    const VERIFY_TOKEN = 'token'
+    const VERIFY_TOKEN = TOKEN_FB
 
     //parse the query params
     const mode = req.query['hub.mode']
